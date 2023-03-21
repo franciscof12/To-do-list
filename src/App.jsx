@@ -15,6 +15,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function App() {
   const [item, setitem] = useState("");
   const [lista, setlista] = useState([]);
+  const [categoria, setcategoria] = useState("Urgente");
+
+  
+
+  const getColor = (categoria) =>{
+    if (categoria == "Normal"){
+      return "rgb(184, 229, 228)"
+    }else if (categoria === "Urgente"){
+      return "rgb(229, 184, 184)"
+    }else if(categoria == "Importante"){
+      return "rgb(226, 229, 184)"
+    }
+  }
 
   const borraItem = (x) => {
     const nuevaLista = [...lista];
@@ -22,8 +35,9 @@ function App() {
     setlista(nuevaLista);
   };
 
+
   const listaItem = lista.map((x, index) => (
-    <ListGroupItem key={index}>
+    <ListGroupItem style={{backgroundColor:getColor(x.categoria)}} key={index}>
       <Button
         variant="link"
         onClick={() => borraItem(index)}
@@ -35,14 +49,13 @@ function App() {
           icon={faTrash}
         />
       </Button>
-      {x}
+      {x.item}
     </ListGroupItem>
   ));
 
   const nuevoItem = () => {
     const nuevaLista = [...lista];
-    nuevaLista.push(item);
-
+    nuevaLista.push({item, categoria});
     setlista(nuevaLista);
     setitem("");
   };
@@ -61,24 +74,42 @@ function App() {
                 placeholder="introduce la tarea que deseas realizar"
               />
             </Form.Group>
-            <Button variant="success" onClick={nuevoItem}>
-              Añadir
-            </Button>
+            <Form.Group
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+              className="mb-3"
+            >
+              <Button
+                style={{ borderRadius: "15px", width: "20%" }}
+                variant="success"
+                onClick={nuevoItem}
+              >
+                Añadir
+              </Button>            
+              <Form.Select value={categoria} onInput={(e) => setcategoria(e.target.value)} style={{ width: "40%" }} id="disabledSelect">
+                <option>Urgente</option>
+                <option>Importante</option>
+                <option>Normal</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+          <Col>
+            <ListGroup>
+              <ListGroupItem>
+                <h4>Tareas</h4>
+              </ListGroupItem>
+              {listaItem}
+            </ListGroup>
             <Button
-              style={{ margin: "5px" }}
+              style={{ margin: "5px", borderRadius: "15px" }}
               variant="danger"
               onClick={() => setlista([])}
             >
               Eliminar lista de tareas
             </Button>
-          </Col>
-          <Col>
-            <ListGroup>
-              <ListGroupItem>
-                <th>---Tareas:</th>
-              </ListGroupItem>
-              {listaItem}
-            </ListGroup>
           </Col>
         </Row>
       </Container>
