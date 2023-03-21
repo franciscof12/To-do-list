@@ -1,8 +1,11 @@
-Button.borrar{
+Button.borrar {
   margin-right: 15px;
 }
-.contenedorB{
+.contenedorB {
   display: flex;
   flex-direction: row;
-  
+}
+body{
+  background-color: rgb(46, 42, 83);
+  color: white;
 }

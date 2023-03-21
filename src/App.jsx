@@ -61,7 +61,7 @@ function App() {
   };
 
   return (
-    <div className="main">
+    <div className="principal">
       <Container>
         <h1>React List</h1>
         <Row>
