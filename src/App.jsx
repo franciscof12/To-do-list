@@ -10,20 +10,33 @@ import {
   Navbar,
 } from "react-bootstrap";
 import "./App.css";
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function App() {
   const [item, setitem] = useState("");
   const [lista, setlista] = useState([]);
 
-  const borraItem = (x) =>{
-    const nuevaLista  = [...lista]
-    nuevaLista.splice(x,1)
-    setlista(nuevaLista)
-  }
+  const borraItem = (x) => {
+    const nuevaLista = [...lista];
+    nuevaLista.splice(x, 1);
+    setlista(nuevaLista);
+  };
 
   const listaItem = lista.map((x, index) => (
-    <ListGroupItem key={index}><Button variant="link" onClick={()=>borraItem(index)} className="borrar"><FontAwesomeIcon bounce  style={{color: "red", cursor: "pointer"}}  icon={faTrash}/></Button>{x}</ListGroupItem>
+    <ListGroupItem key={index}>
+      <Button
+        variant="link"
+        onClick={() => borraItem(index)}
+        className="borrar"
+      >
+        <FontAwesomeIcon
+          bounce
+          style={{ color: "red", cursor: "pointer" }}
+          icon={faTrash}
+        />
+      </Button>
+      {x}
+    </ListGroupItem>
   ));
 
   const nuevoItem = () => {
