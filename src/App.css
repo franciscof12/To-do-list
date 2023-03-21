@@ -9,3 +9,10 @@ body{
   background-color: rgb(46, 42, 83);
   color: white;
 }
+.inicio{
+  margin-top: 15px;
+}
+.titulo{
+  font-weight: bold;
+  color:white;
+}

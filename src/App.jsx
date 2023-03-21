@@ -9,23 +9,23 @@ import {
   ListGroupItem,
   Navbar,
 } from "react-bootstrap";
+import Barra from "./componentes/Barra";
 import "./App.css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function App() {
   const [item, setitem] = useState("");
   const [lista, setlista] = useState([]);
   const [categoria, setcategoria] = useState("Urgente");
 
-  
-
-  const getColor = (categoria) =>{
-    if (categoria == "Normal"){
-      return "rgb(184, 229, 228)"
-    }else if (categoria === "Urgente"){
-      return "rgb(229, 184, 184)"
-    }else if(categoria == "Importante"){
-      return "rgb(226, 229, 184)"
+  const getColor = (categoria) => {
+    if (categoria == "Normal") {
+      return "rgb(184, 229, 228)";
+    } else if (categoria === "Urgente") {
+      return "rgb(229, 184, 184)";
+    } else if (categoria == "Importante") {
+      return "rgb(226, 229, 184)";
     }
   }
 
@@ -33,11 +33,13 @@ function App() {
     const nuevaLista = [...lista];
     nuevaLista.splice(x, 1);
     setlista(nuevaLista);
-  };
-
+  }
 
   const listaItem = lista.map((x, index) => (
-    <ListGroupItem style={{backgroundColor:getColor(x.categoria)}} key={index}>
+    <ListGroupItem
+      style={{ backgroundColor: getColor(x.categoria) }}
+      key={index}
+    >
       <Button
         variant="link"
         onClick={() => borraItem(index)}
@@ -51,19 +53,20 @@ function App() {
       </Button>
       {x.item}
     </ListGroupItem>
-  ));
+  ))
 
   const nuevoItem = () => {
     const nuevaLista = [...lista];
-    nuevaLista.push({item, categoria});
+    nuevaLista.push({ item, categoria });
     setlista(nuevaLista);
     setitem("");
-  };
+  }
 
   return (
     <div className="principal">
-      <Container>
-        <h1>React List</h1>
+      <Barra />
+      <Container className="inicio">
+      <h1 className="titulo">Bienvenido a ReactList</h1>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -88,8 +91,12 @@ function App() {
                 onClick={nuevoItem}
               >
                 Añadir
-              </Button>            
-              <Form.Select value={categoria} onInput={(e) => setcategoria(e.target.value)} style={{ width: "40%" }} id="disabledSelect">
+              </Button>
+              <Form.Select
+                onInput={(e) => setcategoria(e.target.value)}
+                style={{ width: "40%", backgroundColor: getColor(categoria) }}
+                id="disabledSelect"
+              >
                 <option>Urgente</option>
                 <option>Importante</option>
                 <option>Normal</option>
@@ -114,7 +121,7 @@ function App() {
         </Row>
       </Container>
     </div>
-  );
+  )
 }
 
 export default App;
