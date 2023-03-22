@@ -5,18 +5,18 @@ Button.borrar {
   display: flex;
   flex-direction: row;
 }
-body{
-  background-color: rgb(46, 42, 83);
+body {
+  background-image: url("wallpaper.png");
   color: white;
 }
-.inicio{
+.hero {
   margin-top: 15px;
 }
-.titulo{
+.titulo {
   font-weight: bold;
-  color:white;
+  color: white;
 }
-.formulario{
+.formulario {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
