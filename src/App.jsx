@@ -27,13 +27,13 @@ function App() {
     } else if (categoria == "Importante") {
       return "rgb(226, 229, 184)";
     }
-  }
+  };
 
   const borraItem = (x) => {
     const nuevaLista = [...lista];
     nuevaLista.splice(x, 1);
     setlista(nuevaLista);
-  }
+  };
 
   const listaItem = lista.map((x, index) => (
     <ListGroupItem
@@ -53,38 +53,37 @@ function App() {
       </Button>
       {x.item}
     </ListGroupItem>
-  ))
-
+  ));
+  const [error, seterror] = useState("");
   const nuevoItem = () => {
     const nuevaLista = [...lista];
     nuevaLista.push({ item, categoria });
-    setlista(nuevaLista);
-    setitem("");
-  }
+    if (item.trim() == "") {
+     seterror("tarea sin definir")
+    } else {
+      setlista(nuevaLista);
+      setitem("");
+      seterror("")
+    }
+  };
 
   return (
     <div className="principal">
       <Barra />
       <Container className="inicio">
-      <h1 className="titulo">Bienvenido a ReactList</h1>
+        <h1 className="titulo">Bienvenido a ReactList</h1>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Control
                 type="text"
                 value={item}
-                onInput={(e) => setitem(e.target.value)}
+                onChange={(e) => setitem(e.target.value)}
                 placeholder="introduce la tarea que deseas realizar"
               />
+              <Form.Text className="text-muted">{error}</Form.Text>
             </Form.Group>
-            <Form.Group
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-              className="mb-3"
-            >
+            <Form.Group className="mb-3 formulario">
               <Button
                 style={{ borderRadius: "15px", width: "20%" }}
                 variant="success"
@@ -121,7 +120,7 @@ function App() {
         </Row>
       </Container>
     </div>
-  )
+  );
 }
 
 export default App;

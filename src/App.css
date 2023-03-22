@@ -16,3 +16,8 @@ body{
   font-weight: bold;
   color:white;
 }
+.formulario{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
